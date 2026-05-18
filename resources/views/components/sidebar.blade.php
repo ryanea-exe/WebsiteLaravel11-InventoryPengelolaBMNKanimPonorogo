@@ -612,12 +612,6 @@
                 onmouseout="this.style.backgroundColor='transparent'">
                 <i class="fas fa-info text-[6px]" style="color: {{ $sidebarTextColor }};"></i>
             </button>
-            <!--
-            <button onclick="openInfoModal()"
-                class="w-3.5 h-3.5 flex items-center justify-center rounded-full border border-white hover:bg-blue-700 transition duration-200 shadow-sm">
-                <i class="fas fa-info text-[6px] text-white"></i>
-            </button>
-            -->
         </div>
     </div>
 </aside>
