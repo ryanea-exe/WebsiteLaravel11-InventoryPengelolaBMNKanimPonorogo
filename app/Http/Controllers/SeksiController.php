@@ -19,7 +19,7 @@ class SeksiController extends Controller
             'seksi'         => 'required|string|max:100',
             'seksi_singkat' => 'required|string|max:50',
             'nama_kepala'   => 'required|string|max:100',
-            'nip_kepala'    => 'nullable|string|max:30',
+            'nip_kepala'    => 'nullable|string|max:30'
         ]);
 
         Seksi::create($request->all());
