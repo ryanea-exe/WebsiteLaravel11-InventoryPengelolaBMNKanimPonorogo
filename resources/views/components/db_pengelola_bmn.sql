@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.3
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Waktu pembuatan: 25 Apr 2026 pada 08.45
--- Versi server: 8.0.30
--- Versi PHP: 8.2.30
+-- Waktu pembuatan: 18 Bulan Mei 2026 pada 01.38
+-- Versi server: 8.0.44
+-- Versi PHP: 8.3.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `db_pengelola_bmn4`
+-- Basis data: `db_pengelola_bmn`
 --
 
 -- --------------------------------------------------------
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `anggota_kelompok` (
   `id` bigint UNSIGNED NOT NULL,
-  `nama` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL
+  `nama` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -92,12 +92,12 @@ INSERT INTO `barangs` (`id`, `kode_barang`, `nama_barang`, `kategori_id`, `jumla
 
 CREATE TABLE `barang_bmn` (
   `id` bigint UNSIGNED NOT NULL,
-  `kode_barang` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nama_barang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kode_barang` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nama_barang` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `kategori_id` bigint UNSIGNED NOT NULL,
-  `merk_type` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `merk_type` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `jumlah` int NOT NULL DEFAULT '0',
-  `satuan` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `satuan` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -122,7 +122,7 @@ INSERT INTO `barang_bmn` (`id`, `kode_barang`, `nama_barang`, `kategori_id`, `me
 
 CREATE TABLE `barang_masuk` (
   `id` bigint UNSIGNED NOT NULL,
-  `kode_transaksi` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kode_transaksi` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `tanggal` datetime NOT NULL,
   `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -330,14 +330,14 @@ INSERT INTO `kategori` (`id`, `nama`, `created_at`, `updated_at`) VALUES
 
 CREATE TABLE `kendaraan` (
   `id` bigint UNSIGNED NOT NULL,
-  `nomor_polisi` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `nomor_polisi` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `jenis_kendaraan` enum('Motor','Mobil') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nama_kendaraan` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tahun` int NOT NULL,
   `seksi_id` bigint UNSIGNED DEFAULT NULL,
   `tanggal_pajak_berkala` date DEFAULT NULL,
   `rentang_waktu_servis` int DEFAULT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -447,12 +447,6 @@ CREATE TABLE `pengajuans` (
 --
 
 INSERT INTO `pengajuans` (`id`, `kode_pengajuan`, `user_id`, `keperluan`, `tanggal_pengajuan`, `status`, `tanggal_proses`, `keterangan_proses`, `read_at`, `created_at`, `updated_at`) VALUES
-(69, 'TRK-20260210-0062', 14, 'sa', '2026-02-10 00:00:00', 'Ditolak', '2026-02-18 00:00:00', NULL, NULL, '2026-02-10 07:03:17', '2026-02-11 03:16:41'),
-(71, 'TRK-20260210-0064', 14, 'a', '2026-02-10 00:00:00', 'Ditolak', '2026-02-18 00:00:00', NULL, NULL, '2026-02-10 07:03:46', '2026-02-11 05:59:11'),
-(83, 'TRK-20260213-0001', 13, 'asasasasa', '2026-02-13 00:00:00', 'Disetujui Sebagian', '2026-03-11 00:00:00', 'lemarine r perlu', NULL, '2026-02-13 02:10:13', '2026-03-11 03:03:12'),
-(84, 'TRK-20260213-0002', 13, 'as', '2026-02-13 00:00:00', 'Disetujui', '2026-02-18 00:00:00', NULL, NULL, '2026-02-13 02:21:55', '2026-02-13 02:39:32'),
-(86, 'TRK-20260218-0002', 13, 'sadasa', '2026-02-18 00:00:00', 'Disetujui Sebagian', '2026-02-20 00:00:00', NULL, NULL, '2026-02-18 02:58:33', '2026-02-20 01:45:22'),
-(87, 'TRK-20260218-0003', 13, 'hhhghgh', '2026-02-18 00:00:00', 'Disetujui', '2026-02-26 00:00:00', NULL, NULL, '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
 (89, 'TRK-20260220-0001', 2, 'bmznxbcmnzx', '2026-02-20 00:00:00', 'Disetujui Sebagian', '2026-02-22 00:00:00', NULL, '2026-02-25 02:55:45', '2026-02-20 04:39:46', '2026-02-25 02:55:45'),
 (90, 'TRK-20260222-0001', 2, 'penting', '2026-02-22 00:00:00', 'Disetujui', '2026-02-22 00:00:00', NULL, '2026-02-25 02:55:45', '2026-02-22 05:20:41', '2026-02-25 02:55:45'),
 (91, 'TRK-20260222-0002', 2, 'tes', '2026-02-22 00:00:00', 'Ditolak', '2026-02-22 00:00:00', NULL, '2026-02-25 02:55:45', '2026-02-22 05:22:54', '2026-02-25 02:55:45'),
@@ -490,13 +484,13 @@ INSERT INTO `pengajuans` (`id`, `kode_pengajuan`, `user_id`, `keperluan`, `tangg
 
 CREATE TABLE `pengajuan_bmn` (
   `id` bigint UNSIGNED NOT NULL,
-  `kode_pengajuan` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `kode_pengajuan` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `user_id` bigint UNSIGNED NOT NULL,
-  `keperluan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keperluan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `tanggal_pengajuan` datetime NOT NULL,
-  `status` enum('Diajukan','Disetujui Sebagian','Disetujui','Ditolak') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Diajukan',
+  `status` enum('Diajukan','Disetujui Sebagian','Disetujui','Ditolak') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Diajukan',
   `tanggal_proses` datetime DEFAULT NULL,
-  `keterangan_proses` text COLLATE utf8mb4_unicode_ci,
+  `keterangan_proses` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `read_at` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -511,7 +505,8 @@ INSERT INTO `pengajuan_bmn` (`id`, `kode_pengajuan`, `user_id`, `keperluan`, `ta
 (3, 'TRK-20260401-0001', 2, 'dibuat ngevideo', '2026-04-01 08:53:10', 'Diajukan', NULL, NULL, NULL, '2026-04-01 01:53:10', '2026-04-01 01:53:10'),
 (4, 'TRK-20260406-0001', 2, 'untuk mengganti laptop yang rusak', '2026-04-06 12:56:00', 'Disetujui', '2026-04-06 13:07:30', NULL, NULL, '2026-04-06 05:56:00', '2026-04-06 06:07:30'),
 (5, 'TRK-20260406-0002', 2, 'untuk tusi atau take video', '2026-04-06 15:37:49', 'Disetujui', '2026-04-06 15:38:36', NULL, '2026-04-19 13:29:45', '2026-04-06 08:37:49', '2026-04-19 13:29:45'),
-(6, 'TRK-20260408-0001', 2, 'untuk dukungan tusi', '2026-04-08 13:46:55', 'Disetujui', '2026-04-08 13:47:37', NULL, '2026-04-17 01:24:12', '2026-04-08 06:46:55', '2026-04-17 01:24:12');
+(6, 'TRK-20260408-0001', 2, 'untuk dukungan tusi', '2026-04-08 13:46:55', 'Disetujui', '2026-04-08 13:47:37', NULL, '2026-04-17 01:24:12', '2026-04-08 06:46:55', '2026-04-17 01:24:12'),
+(7, 'TRK-20260429-0001', 15, 'untuk tusi', '2026-04-29 10:44:58', 'Diajukan', NULL, NULL, '2026-04-29 03:45:17', '2026-04-29 03:44:58', '2026-04-29 03:45:17');
 
 -- --------------------------------------------------------
 
@@ -525,7 +520,7 @@ CREATE TABLE `pengajuan_bmn_detail` (
   `barang_id` bigint UNSIGNED NOT NULL,
   `jumlah` int NOT NULL,
   `jumlah_disetujui` int DEFAULT NULL,
-  `status` enum('Diajukan','Disetujui','Ditolak') COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` enum('Diajukan','Disetujui','Ditolak') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -541,7 +536,9 @@ INSERT INTO `pengajuan_bmn_detail` (`id`, `pengajuan_id`, `barang_id`, `jumlah`,
 (7, 4, 1, 1, 1, 'Disetujui', '2026-04-06 05:56:00', '2026-04-06 06:07:30'),
 (8, 5, 2, 1, 1, 'Disetujui', '2026-04-06 08:37:49', '2026-04-06 08:38:35'),
 (9, 6, 2, 1, 1, 'Disetujui', '2026-04-08 06:46:55', '2026-04-08 06:47:37'),
-(10, 6, 1, 1, 1, 'Disetujui', '2026-04-08 06:46:55', '2026-04-08 06:47:37');
+(10, 6, 1, 1, 1, 'Disetujui', '2026-04-08 06:46:55', '2026-04-08 06:47:37'),
+(11, 7, 2, 1, NULL, 'Diajukan', '2026-04-29 03:44:58', '2026-04-29 03:44:58'),
+(12, 7, 1, 1, NULL, 'Diajukan', '2026-04-29 03:44:58', '2026-04-29 03:44:58');
 
 -- --------------------------------------------------------
 
@@ -565,24 +562,6 @@ CREATE TABLE `pengajuan_details` (
 --
 
 INSERT INTO `pengajuan_details` (`id`, `pengajuan_id`, `barang_id`, `jumlah`, `jumlah_disetujui`, `status`, `created_at`, `updated_at`) VALUES
-(146, 69, 8, 1, NULL, 'Ditolak', '2026-02-10 07:03:17', '2026-02-11 03:16:41'),
-(147, 69, 3, 2, NULL, 'Ditolak', '2026-02-10 07:03:17', '2026-02-11 03:16:41'),
-(148, 69, 2, 1, NULL, 'Ditolak', '2026-02-10 07:03:17', '2026-02-11 03:16:41'),
-(150, 71, 8, 1, NULL, 'Ditolak', '2026-02-10 07:03:46', '2026-02-11 05:59:11'),
-(169, 83, 4, 4, 2, 'Disetujui', '2026-02-13 02:10:13', '2026-03-11 03:03:12'),
-(170, 83, 8, 3, 0, 'Ditolak', '2026-02-13 02:10:13', '2026-03-11 03:03:12'),
-(171, 83, 3, 2, 2, 'Disetujui', '2026-02-13 02:10:13', '2026-03-11 03:03:12'),
-(172, 84, 3, 1, 1, 'Disetujui', '2026-02-13 02:21:55', '2026-02-13 02:39:32'),
-(173, 84, 8, 1, 1, 'Disetujui', '2026-02-13 02:21:55', '2026-02-13 02:39:32'),
-(176, 86, 3, 1, 1, 'Disetujui', '2026-02-18 02:58:33', '2026-02-20 01:45:22'),
-(177, 86, 7, 1, 1, 'Disetujui', '2026-02-18 02:58:33', '2026-02-20 01:45:22'),
-(178, 86, 4, 1, NULL, 'Ditolak', '2026-02-18 02:58:33', '2026-02-20 01:45:22'),
-(179, 87, 3, 1, 1, 'Disetujui', '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
-(180, 87, 4, 1, 1, 'Disetujui', '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
-(181, 87, 2, 1, 1, 'Disetujui', '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
-(182, 87, 7, 1, 1, 'Disetujui', '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
-(183, 87, 8, 1, 1, 'Disetujui', '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
-(184, 87, 5, 1, 1, 'Disetujui', '2026-02-18 02:59:26', '2026-02-26 03:13:39'),
 (185, 89, 3, 1, 1, 'Disetujui', '2026-02-20 04:39:46', '2026-02-22 05:53:22'),
 (186, 89, 8, 1, NULL, 'Ditolak', '2026-02-20 04:39:46', '2026-02-22 05:53:22'),
 (187, 90, 5, 1, 1, 'Disetujui', '2026-02-22 05:20:41', '2026-02-22 06:10:48'),
@@ -650,10 +629,10 @@ CREATE TABLE `pengajuan_pemeliharaan` (
 --
 
 INSERT INTO `pengajuan_pemeliharaan` (`id`, `kode_pengajuan`, `tanggal_pengajuan`, `user_id`, `kendaraan_id`, `status`, `tanggal_proses`, `read_at`, `created_at`, `updated_at`) VALUES
-(2, 'PM-20260419-01', '2026-04-19 11:58:00', 2, 1, 'Disetujui', '2026-04-20 09:10:06', '2026-04-23 01:47:03', '2026-04-19 04:58:00', '2026-04-23 01:47:03'),
-(3, 'PM-20260421-01', '2026-04-21 09:53:05', 2, 1, 'Ditolak', '2026-04-23 08:06:55', NULL, '2026-04-21 02:53:05', '2026-04-23 01:06:55'),
+(2, 'PM-20260419-01', '2026-04-19 11:58:00', 2, 1, 'Disetujui', '2026-04-20 09:10:06', NULL, '2026-04-19 04:58:00', '2026-04-23 01:47:03'),
+(3, 'PM-20260421-01', '2026-04-21 09:53:05', 2, 1, 'Ditolak', '2026-04-23 08:06:55', '2026-04-27 15:13:28', '2026-04-21 02:53:05', '2026-04-27 15:13:28'),
 (4, 'PM-20260421-02', '2026-04-21 10:20:39', 2, 4, 'Disetujui', '2026-04-21 10:58:08', '2026-04-22 05:15:05', '2026-04-21 03:20:39', '2026-04-22 05:15:05'),
-(5, 'PM-20260421-03', '2026-04-21 10:55:05', 2, 1, 'Ditolak', '2026-04-22 14:29:44', NULL, '2026-04-21 03:55:05', '2026-04-22 07:29:44'),
+(5, 'PM-20260421-03', '2026-04-21 10:55:05', 2, 1, 'Ditolak', '2026-04-22 14:29:44', '2026-04-26 11:26:12', '2026-04-21 03:55:05', '2026-04-26 11:26:12'),
 (6, 'PM-20260422-01', '2026-04-22 11:55:04', 3, 6, 'Diajukan', NULL, NULL, '2026-04-22 04:55:04', '2026-04-22 04:55:04'),
 (7, 'PM-20260422-02', '2026-04-22 14:35:50', 15, 4, 'Disetujui', '2026-04-22 14:49:42', '2026-04-23 02:18:23', '2026-04-22 07:35:50', '2026-04-23 02:18:23');
 
@@ -666,7 +645,7 @@ INSERT INTO `pengajuan_pemeliharaan` (`id`, `kode_pengajuan`, `tanggal_pengajuan
 CREATE TABLE `pengajuan_pemeliharaan_detail` (
   `id` bigint UNSIGNED NOT NULL,
   `pengajuan_id` bigint UNSIGNED NOT NULL,
-  `keperluan` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `keperluan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `estimasi_biaya` int NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -723,8 +702,8 @@ CREATE TABLE `riwayat_servis` (
   `id` bigint UNSIGNED NOT NULL,
   `kendaraan_id` bigint UNSIGNED NOT NULL,
   `tanggal_servis` date NOT NULL,
-  `nama_pengurus` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `keterangan` text COLLATE utf8mb4_unicode_ci,
+  `nama_pengurus` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -748,7 +727,7 @@ INSERT INTO `riwayat_servis` (`id`, `kendaraan_id`, `tanggal_servis`, `nama_peng
 CREATE TABLE `seksi` (
   `id` bigint UNSIGNED NOT NULL,
   `seksi` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `seksi_singkat` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `seksi_singkat` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nama_kepala` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `nip_kepala` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -786,10 +765,10 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, `last_activity`) VALUES
-('g5fcAIhXhvDmFb2hHXVyjLhmPILhw0cFWAlW0zV8', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiczQ4anNCWERPcktxdFY2azU3TW42eTZDVXRUOGVHV3V4VzV4R2pxeCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJuZXciO2E6MDp7fXM6Mzoib2xkIjthOjA6e319czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sYXJhdmVsMTEtcGVuZ2Vsb2xhYm1uLnRlc3QvYmFyYW5nIjt9czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTt9', 1777002547),
-('OWIHWy1y0iOwZbtpEAXKGLEMRV76FJVHw0WajBBx', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUjBLMEF2aTUxdG9BRFJkblVpZ25ONHl4alZiR1Y2d3ZzdjBqQWx3byI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo1NzoiaHR0cDovL2xhcmF2ZWwxMS1wZW5nZWxvbGFibW4udGVzdC9wZW1lbGloYXJhYW4va2VuZGFyYWFuIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTc6Imh0dHA6Ly9sYXJhdmVsMTEtcGVuZ2Vsb2xhYm1uLnRlc3QvcGVtZWxpaGFyYWFuL2tlbmRhcmFhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1776928814),
-('OwU5HAAD7NxrESctKg3AvfALk6kFXroltdtToeaZ', NULL, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YToyOntzOjY6Il90b2tlbiI7czo0MDoiNzRoeEpQYzJSeWpqbkY4OXllaWtOM2JrdTU2YVhtTHlZMWpOSVd3VCI7czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319fQ==', 1776992286),
-('tQDgpXVW3i7hAfQ8xM3EAF6Vnf9sn4MfuNnXgKXa', 1, '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiUXVXRFAySExlaVBDOTRJQmliUGxVVjJmOUhodkJEWnN2T1g5Q2RvViI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo1NzoiaHR0cDovL2xhcmF2ZWwxMS1wZW5nZWxvbGFibW4udGVzdC9wZW1lbGloYXJhYW4va2VuZGFyYWFuIjt9czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTc6Imh0dHA6Ly9sYXJhdmVsMTEtcGVuZ2Vsb2xhYm1uLnRlc3QvcGVtZWxpaGFyYWFuL2tlbmRhcmFhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE7fQ==', 1776943818);
+('05oFISUMob5hZx8LwEZtnO4kvJhyatgUiPet7KSX', 18, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiSHNpaVh5QTBOQlJWY2xtZk44S3Vyd051QUNiU1V5SkpPakxxbUNlYyI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NDE6Imh0dHA6Ly9sYXJhdmVsMTEtcGVuZ2Vsb2xhYm1uLnRlc3QvYmFyYW5nIjt9czo2OiJfZmxhc2giO2E6Mjp7czozOiJvbGQiO2E6MDp7fXM6MzoibmV3IjthOjA6e319czo1MDoibG9naW5fd2ViXzU5YmEzNmFkZGMyYjJmOTQwMTU4MGYwMTRjN2Y1OGVhNGUzMDk4OWQiO2k6MTg7fQ==', 1778546691),
+('Ew1vRxhAOhglReAxwMXUIMwtr56YM0fQHBTn9vGU', 18, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', 'YTo0OntzOjY6Il90b2tlbiI7czo0MDoiTDBHelBLTThqWG5hN2J0M3YzM2NzMm16Rzd2aVhPSFBHYUYxempNTCI7czo5OiJfcHJldmlvdXMiO2E6MTp7czozOiJ1cmwiO3M6NTc6Imh0dHA6Ly9sYXJhdmVsMTEtcGVuZ2Vsb2xhYm1uLnRlc3QvcGVtZWxpaGFyYWFuL2tlbmRhcmFhbiI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE4O30=', 1778597722),
+('F1PNboHwUZuebnpaotd8dMLI9d6PUq8k4eXjivKB', 18, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiV2ZPaVdYZEV5Y3dMUHo2ajR3d3NYSnRKQ1JBOU9rZXhIUUZXdlZtYiI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo0MToiaHR0cDovL2xhcmF2ZWwxMS1wZW5nZWxvbGFibW4udGVzdC9iYXJhbmciO31zOjk6Il9wcmV2aW91cyI7YToxOntzOjM6InVybCI7czo0NDoiaHR0cDovL2xhcmF2ZWwxMS1wZW5nZWxvbGFibW4udGVzdC9kYXNoYm9hcmQiO31zOjY6Il9mbGFzaCI7YToyOntzOjM6Im9sZCI7YTowOnt9czozOiJuZXciO2E6MDp7fX1zOjUwOiJsb2dpbl93ZWJfNTliYTM2YWRkYzJiMmY5NDAxNTgwZjAxNGM3ZjU4ZWE0ZTMwOTg5ZCI7aToxODt9', 1778564068),
+('IS5rE3z5urCDLzYCsyaCZNWL094kasDbXTK2nMYS', 18, '127.0.0.1', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36', 'YTo1OntzOjY6Il90b2tlbiI7czo0MDoiQkJTTjJhUFhLQzd3QVZJTGZQZmpFdnk0VTNVQTRqSld5ZW9Tc0MyNyI7czozOiJ1cmwiO2E6MTp7czo4OiJpbnRlbmRlZCI7czo1ODoiaHR0cDovL2xhcmF2ZWwxMS1wZW5nZWxvbGFibW4udGVzdC9wZW5nYWp1YW4vcml3YXlhdF9hZG1pbiI7fXM6OToiX3ByZXZpb3VzIjthOjE6e3M6MzoidXJsIjtzOjQ3OiJodHRwOi8vbGFyYXZlbDExLXBlbmdlbG9sYWJtbi50ZXN0L3Byb2ZpbGUvZWRpdCI7fXM6NjoiX2ZsYXNoIjthOjI6e3M6Mzoib2xkIjthOjA6e31zOjM6Im5ldyI7YTowOnt9fXM6NTA6ImxvZ2luX3dlYl81OWJhMzZhZGRjMmIyZjk0MDE1ODBmMDE0YzdmNThlYTRlMzA5ODlkIjtpOjE4O30=', 1779068260);
 
 -- --------------------------------------------------------
 
@@ -800,15 +779,15 @@ INSERT INTO `sessions` (`id`, `user_id`, `ip_address`, `user_agent`, `payload`, 
 CREATE TABLE `settings` (
   `id` bigint UNSIGNED NOT NULL,
   `logo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `login_bg` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `login_bg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nama_aplikasi` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Singobarong',
-  `nama_aplikasi2` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT 'Pemeliharaan',
+  `nama_aplikasi2` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT 'Pemeliharaan',
   `subnama_aplikasi` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `login_opening_text` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
   `sidebar_color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '#1e3a8a',
   `sidebar_text_color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '#ffffff',
   `sidebar_hover_color` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT '#1d4ed8',
-  `format_cetak` enum('pdf','docx') COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `format_cetak` enum('pdf','docx') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -818,7 +797,7 @@ CREATE TABLE `settings` (
 --
 
 INSERT INTO `settings` (`id`, `logo`, `login_bg`, `nama_aplikasi`, `nama_aplikasi2`, `subnama_aplikasi`, `login_opening_text`, `sidebar_color`, `sidebar_text_color`, `sidebar_hover_color`, `format_cetak`, `created_at`, `updated_at`) VALUES
-(1, 'logo_1771994474.png', 'login_bg_1775437685.jpg', 'Singobarong', 'Pemeliharaan', 'Sistem Informasi Inventaris Pengelolaan Operasional Barang Persediaan dan Aset BMN Kantor Imigrasi Ponorogo Kelas II Non TPI Ponorogo', 'Aplikasi ini digunakan untuk mengelola persediaan Barang Milik Negara, memfasilitasi proses permintaan barang secara digital, serta memantau distribusi stok secara real-time, akurat, dan transparan.', '#00178a', '#ffffff', '#004cff', 'docx', '2026-02-12 02:36:04', '2026-04-21 07:15:49');
+(1, 'logo_1771994474.png', 'login_bg_1775437685.jpg', 'Singobarong', 'Pemeliharaan', 'Sistem Informasi Inventaris Pengelolaan Operasional Barang Persediaan dan Aset BMN Kantor Imigrasi Ponorogo Kelas II Non TPI Ponorogo', 'Aplikasi ini digunakan untuk mengelola Barang Persediaan dan Barang Milik Negara, memfasilitasi proses permintaan barang secara digital, serta memantau distribusi stok secara real-time, akurat, dan transparan.', '#00178a', '#ffffff', '#004cff', 'docx', '2026-02-12 02:36:04', '2026-05-05 01:00:07');
 
 -- --------------------------------------------------------
 
@@ -832,8 +811,8 @@ CREATE TABLE `settings2` (
   `nip_kasubbag_tu` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nama_kaurumum_tu` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `nip_kaurumum_tu` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nama_staffbmn_tu` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `nip_staffbmn_tu` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nama_staffbmn_tu` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip_staffbmn_tu` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -886,7 +865,7 @@ CREATE TABLE `users` (
   `id` bigint UNSIGNED NOT NULL,
   `name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `nip` varchar(30) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `nip` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `photo` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `seksi_id` bigint UNSIGNED DEFAULT NULL,
   `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -903,16 +882,16 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `nip`, `photo`, `seksi_id`, `password`, `role`, `status`, `last_login_at`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin BMN', 'admin@imigrasi-ponorogo.go.id', NULL, 'profiles/z8ZdB1IP0hA89dhEhkNbgahA39eIfLzYhPuqOzmx.jpg', 4, '$2y$12$minBmJ/.TRH0.WCOS0sBgOvWEem.M6zJGHm8qzQVS./TkNE9hUcG.', 'Administrator', 'Aktif', '2026-04-24 09:52:49', NULL, '2026-01-07 07:07:45', '2026-04-24 02:52:49'),
-(2, 'Seksi Tikim', 'tikim01@gmail.com', NULL, 'profiles/yZZa6sGcWN8qvzPP2UCSnGFlBmsbYtiQdY1gQw6l.jpg', 1, '$2y$12$DEafOhFWSkBvS7nNq2STBe1RI4hUNfSU9SbeImONMWtACkPw1HwFG', 'Staff', 'Aktif', '2026-04-24 09:51:55', NULL, '2026-01-07 21:40:35', '2026-04-24 02:51:55'),
+(1, 'Admin BMN', 'admin@imigrasi-ponorogo.go.id', NULL, 'profiles/z8ZdB1IP0hA89dhEhkNbgahA39eIfLzYhPuqOzmx.jpg', 4, '$2y$12$minBmJ/.TRH0.WCOS0sBgOvWEem.M6zJGHm8qzQVS./TkNE9hUcG.', 'Administrator', 'Aktif', '2026-05-11 13:13:46', NULL, '2026-01-07 07:07:45', '2026-05-11 06:13:46'),
+(2, 'Seksi Tikim', 'tikim01@gmail.com', NULL, 'profiles/yZZa6sGcWN8qvzPP2UCSnGFlBmsbYtiQdY1gQw6l.jpg', 1, '$2y$12$DEafOhFWSkBvS7nNq2STBe1RI4hUNfSU9SbeImONMWtACkPw1HwFG', 'Staff', 'Aktif', '2026-05-11 13:14:51', NULL, '2026-01-07 21:40:35', '2026-05-11 06:14:51'),
 (3, 'Seksi Inteldakim', 'inteldakim01@gmail.com', NULL, 'profiles/default-profile.png', 3, '$2y$12$prHDyrqnbJyOC.P4VECJy.SiIEZZLrSKb.ByWYpAw9WTnvrLYWoq2', 'Staff', 'Aktif', '2026-04-22 11:54:20', NULL, '2026-01-13 19:01:23', '2026-04-22 04:54:20'),
 (5, 'Seksi Doklanintalkim', 'doklanintalkim01@gmail.com', NULL, 'profiles/default-profile.png', 2, '$2y$12$TrIdpj30vNum3uBfYSKGOej.ouDGr7las9PHs8JCFcFwStlj3mNLS', 'Staff', 'Aktif', '2026-03-11 08:43:55', NULL, '2026-01-18 20:12:12', '2026-03-11 01:43:55'),
 (6, 'Subbagian TU', 'tu01@gmail.com', NULL, 'profiles/default-profile.png', 4, '$2y$12$PXN5pjblbC7OBTvuN4hvueZhw2fi5vVRPISyfje0XbWPH0KRlqDg.', 'Staff', 'Aktif', '2026-03-09 11:05:16', NULL, '2026-01-18 20:13:19', '2026-03-09 04:05:16'),
-(11, 'a', 'a@gmail.com', NULL, 'profiles/8gfvEvsTPbZl7SBbmThX3pBIeRvYgYkkrV2rJ6Xv.jpg', 4, '$2y$12$U904DvcjtS0RczK9kHIeR.tZWbHaOZjQXgFOusUNE6cecFlHV4Vm.', 'Staff', 'Tidak Aktif', NULL, NULL, '2026-01-19 23:11:01', '2026-02-26 02:19:32'),
+(11, 'Seksi Doklalintalkim 2', 'doklanintalkim02@gmail.com', NULL, 'profiles/8gfvEvsTPbZl7SBbmThX3pBIeRvYgYkkrV2rJ6Xv.jpg', 2, '$2y$12$kyc1WLyWenkfFHxjsR0ChOkCz7FG.KrVgvcKrTamPL4tTUo82R7jK', 'Staff', 'Tidak Aktif', NULL, NULL, '2026-01-19 23:11:01', '2026-05-18 01:35:30'),
 (12, 'PPNPN', 'ppnpn@gmail.com', NULL, 'profiles/default-profile.png', 5, '$2y$12$8gVnCvGUJFGyMdCmeMp7D.g1s8ho9BBtWFzvIx1iyLH7ZN/5zX/0i', 'Staff', 'Aktif', '2026-04-04 08:34:02', NULL, '2026-01-21 20:03:57', '2026-04-04 01:34:02'),
-(13, 'Arsa', 'arsa@gmail.com', NULL, 'profiles/0MkdEg2xNif5L2fNOARTCFZPc9Z5hkqga0aDrlhF.png', 1, '$2y$12$jXIZdZ4rUQT/pzazocW6JOGrkM4CT1kGv07ENCqNlWnQKvxqSlpsG', 'Staff', 'Aktif', '2026-02-18 09:57:17', NULL, '2026-02-02 06:51:25', '2026-02-20 02:41:10'),
-(14, 'Bambang', 'bambang@gmail.com', NULL, 'profiles/default-profile.png', 3, '$2y$12$HjZR0DAksZ0yXav7SdgAK.6QUgDK4BcdzoOBvRQK9pMzu65mrSAiu', 'Staff', 'Aktif', '2026-02-10 14:01:55', NULL, '2026-02-10 02:24:06', '2026-02-20 02:41:28'),
-(15, 'Seksi Tikim 2', 'tikim02@gmail.com', NULL, 'profiles/default-profile.png', 1, '$2y$12$NuEYK9.W3QInOirFX7Jj0.j2iIVH1Cdbyg63zP18ILa4cvsVepinm', 'Staff', 'Aktif', '2026-04-22 14:22:25', NULL, '2026-04-22 04:58:09', '2026-04-22 07:22:25');
+(15, 'Seksi Tikim 2', 'tikim02@gmail.com', NULL, 'profiles/Y2gKNRMULJZhD3cbPHBZpbm85Hpn9HjXZbkocuHS.jpg', 1, '$2y$12$NuEYK9.W3QInOirFX7Jj0.j2iIVH1Cdbyg63zP18ILa4cvsVepinm', 'Staff', 'Aktif', '2026-05-11 09:15:45', NULL, '2026-04-22 04:58:09', '2026-05-11 02:15:45'),
+(16, 'Admin 2', 'admin02@gmail.com', NULL, 'profiles/a6HDJtcqSla47ezeK0KvVmClUiZJDzZFJxSuLLmB.jpg', 4, '$2y$12$VLZIyzZgaK6sOT4wZRFSb.biOWb3goLRAajv29TCc22uDHHSD7nga', 'Administrator', 'Aktif', '2026-04-28 13:45:37', NULL, '2026-04-28 06:45:21', '2026-04-29 01:57:32'),
+(18, 'Super Admin', 'superadmin@system.com', NULL, 'profiles/6aWF8IJk07YyIit5XS5TugQ0ZAV0r3XZm8MxfSAF.jpg', 1, '$2y$12$4W2wPouzvjd8p3Jeu7QfW.SnfG5S0mQp6HfygHJDmVq5wrX7PdAGW', 'Administrator', 'Aktif', '2026-05-18 08:33:30', NULL, '2026-04-29 03:03:19', '2026-05-18 01:33:30');
 
 -- --------------------------------------------------------
 
@@ -951,7 +930,7 @@ INSERT INTO `_barang_masuk` (`id`, `barang_id`, `jumlah`, `harga_satuan`, `harga
 (20, 7, 5, 10000000.00, 50000000.00, '2026-03-12 08:04:22', NULL, '2026-03-12 01:04:22', '2026-03-12 01:04:22');
 
 --
--- Indexes for dumped tables
+-- Indeks untuk tabel yang dibuang
 --
 
 --
@@ -1249,13 +1228,13 @@ ALTER TABLE `pengajuans`
 -- AUTO_INCREMENT untuk tabel `pengajuan_bmn`
 --
 ALTER TABLE `pengajuan_bmn`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengajuan_bmn_detail`
 --
 ALTER TABLE `pengajuan_bmn_detail`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengajuan_details`
@@ -1309,7 +1288,7 @@ ALTER TABLE `settings2`
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `_barang_masuk`
@@ -1356,7 +1335,13 @@ ALTER TABLE `kendaraan`
 -- Ketidakleluasaan untuk tabel `pengajuans`
 --
 ALTER TABLE `pengajuans`
-  ADD CONSTRAINT `pengajuans_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `pengajuans_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+--
+-- Ketidakleluasaan untuk tabel `pengajuan_bmn`
+--
+ALTER TABLE `pengajuan_bmn`
+  ADD CONSTRAINT `fk_pengajuanbmn_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 --
 -- Ketidakleluasaan untuk tabel `pengajuan_bmn_detail`
@@ -1377,7 +1362,7 @@ ALTER TABLE `pengajuan_details`
 --
 ALTER TABLE `pengajuan_pemeliharaan`
   ADD CONSTRAINT `fk_pemeliharaan_kendaraan` FOREIGN KEY (`kendaraan_id`) REFERENCES `kendaraan` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
-  ADD CONSTRAINT `fk_pemeliharaan_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+  ADD CONSTRAINT `fk_pemeliharaan_user` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON UPDATE RESTRICT;
 
 --
 -- Ketidakleluasaan untuk tabel `pengajuan_pemeliharaan_detail`

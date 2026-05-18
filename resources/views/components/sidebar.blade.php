@@ -639,8 +639,7 @@
             Informasi Website
         </h3>
         <p class="text-sm text-gray-600 mb-2">
-            oleh tim IT/Pengelola Kesisteman & tim Pengelola BMN<br>
-            magang Kemnaker Batch 2 (2025/2026)
+            oleh tim Magang Kemnaker Batch 2 (2025/2026)
         </p>
     </div>
 </div>
