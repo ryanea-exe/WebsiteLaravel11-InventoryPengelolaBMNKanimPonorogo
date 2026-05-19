@@ -146,7 +146,11 @@
     <!-- FOOTER -->
     <div class="px-4 py-4 border-t flex justify-between items-center">
         <!-- KIRI: APPROVE / REJECT -->
-        <div class="flex gap-2">
+        <div class="flex gap-2 
+            @if($pengajuan->status === 'Disetujui' || $pengajuan->status === 'Ditolak')
+                invisible
+            @endif
+            ">
             <form action="{{ route('pemeliharaan.approve', $pengajuan->id) }}" method="POST">
                 @csrf
                 <button class="px-3 py-1.5 bg-green-600 text-white rounded-lg hover:bg-green-700 text-sm">

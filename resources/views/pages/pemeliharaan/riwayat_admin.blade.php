@@ -455,6 +455,12 @@
                 }
 
                 statusEl.textContent = data.status ?? '-';
+                const actionButtons = document.getElementById('actionButtons');
+                if (data.status === 'Disetujui' || data.status === 'Ditolak') {
+                    actionButtons.classList.add('invisible');
+                } else {
+                    actionButtons.classList.remove('invisible');
+                }
 
                 const tanggalProsesContainer = document.getElementById('tanggalProsesContainer');
                 const keteranganProsesContainer = document.getElementById('keteranganProsesContainer');

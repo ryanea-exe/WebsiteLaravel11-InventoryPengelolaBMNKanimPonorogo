@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
+use App\Models\Setting;
 
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\DashboardController;
@@ -27,6 +29,8 @@ use App\Http\Controllers\SeksiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\Setting2Controller;
 
+$setting = Setting::first();
+
 /*
 |--------------------------------------------------------------------------
 | AUTH
@@ -42,15 +46,15 @@ Route::post('/login', [LoginController::class, 'authenticate'])
 Route::post('/logout', [LoginController::class, 'logout'])
     ->name('logout');
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function () use ($setting) {
     /*
     |--------------------------------------------------------------------------
     | SEMUA ROLE
     |--------------------------------------------------------------------------
     */
-    Route::get('/dashboard', [DashboardController::class, 'index'])
+    Route::get('/dashboard-' . Str::slug($setting->nama_aplikasi ?? 'dashboard-singobarong'), [DashboardController::class, 'index'])
         ->name('dashboard.index');
-    Route::get('/dashboard2', [Dashboard2Controller::class, 'index'])
+    Route::get('/dashboard-' . Str::slug($setting->nama_aplikasi2 ?? 'dashboard-pemeliharaan'), [Dashboard2Controller::class, 'index'])
         ->name('dashboard2.index');
 
     // EDIT PROFILE
@@ -106,13 +110,13 @@ Route::middleware('auth')->group(function () {
             ->name('kendaraan.index');
 
         // Riwayat Servis
-        Route::get('/riwayat_servis', [RiwayatServisController::class, 'index'])
+        Route::get('/riwayat-servis', [RiwayatServisController::class, 'index'])
             ->name('riwayat_servis.index');
-        Route::post('/riwayat_servis', [RiwayatServisController::class, 'store'])
+        Route::post('/riwayat-servis', [RiwayatServisController::class, 'store'])
             ->name('riwayat_servis.store');
-        Route::put('/riwayat_servis/{id}', [RiwayatServisController::class, 'update'])
+        Route::put('/riwayat-servis/{id}', [RiwayatServisController::class, 'update'])
             ->name('riwayat_servis.update');
-        Route::delete('/riwayat_servis/{id}', [RiwayatServisController::class, 'destroy'])
+        Route::delete('/riwayat-servis/{id}', [RiwayatServisController::class, 'destroy'])
             ->name('riwayat_servis.destroy');
     });
 
@@ -191,7 +195,7 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     /*
     | RIWAYAT PENGAJUAN BARANG PERSEDIAAN (ADMINISTRATOR)
     */
-    Route::get('/pengajuan/riwayat_admin', [PengajuanController::class, 'riwayat_admin'])
+    Route::get('/pengajuan/riwayat-admin', [PengajuanController::class, 'riwayat_admin'])
         ->name('pengajuan.riwayat_admin');
     /* Route::put('/pengajuan/{id}/update-status', [PengajuanController::class, 'updateStatus'])
         ->name('pengajuan.updateStatus'); */
@@ -199,14 +203,14 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
         ->name('pengajuan.updateDetailStatus');
     Route::delete('/pengajuan/{id}', [PengajuanController::class, 'destroy'])
         ->name('pengajuan.destroy');
-    Route::get('/pengajuan/riwayat_admin/{id}', [PengajuanController::class, 'show_admin'])
+    Route::get('/pengajuan/riwayat-admin/{id}', [PengajuanController::class, 'show_admin'])
         ->whereNumber('id')
         ->name('pengajuan.show_admin');
 
     /*
     | RIWAYAT PENGAJUAN BARANG BMN (ADMINISTRATOR)
     */
-    Route::get('/pengajuan-bmn/riwayat_admin', [PengajuanBMNController::class, 'riwayat_admin'])
+    Route::get('/pengajuan-bmn/riwayat-admin', [PengajuanBMNController::class, 'riwayat_admin'])
         ->name('pengajuan-bmn.riwayat_admin');
     /* Route::put('/pengajuan-bmn/{id}/update-status', [PengajuanBMNController::class, 'updateStatus'])
         ->name('pengajuan-bmn.updateStatus'); */
@@ -215,7 +219,7 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     // fetch(`{{ route('pengajuan.updateDetailStatus', ':id') }}`.replace(':id', currentPengajuan.id), {
     Route::delete('/pengajuan-bmn/{id}', [PengajuanBMNController::class, 'destroy'])
         ->name('pengajuan-bmn.destroy');
-    Route::get('/pengajuan-bmn/riwayat_admin/{id}', [PengajuanBMNController::class, 'show_admin'])
+    Route::get('/pengajuan-bmn/riwayat-admin/{id}', [PengajuanBMNController::class, 'show_admin'])
         ->whereNumber('id')
         ->name('pengajuan-bmn.show_admin');
 
@@ -254,7 +258,7 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     | CATATAN (ADMIN)
     */
     Route::middleware(['auth'])->group(function () {
-        Route::get('/catatan/riwayat_admin', [CatatanController::class, 'riwayatAdmin'])
+        Route::get('/catatan/riwayat-admin', [CatatanController::class, 'riwayatAdmin'])
             ->name('catatan.riwayat_admin');
     });
 
@@ -265,15 +269,15 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
     */
     Route::prefix('pemeliharaan')->name('pemeliharaan.')->group(function () {
         // Input Riwayat Pajak
-        Route::get('/input_pajak', [InputPemeliharaanController::class, 'index_pajak'])
+        Route::get('/input-pajak', [InputPemeliharaanController::class, 'index_pajak'])
             ->name('input_pajak.index');
-        Route::post('/input_pajak/pajak', [RiwayatPajakController::class, 'store'])
+        Route::post('/input-pajak/pajak', [RiwayatPajakController::class, 'store'])
             ->name('input_pajak.store');
             
         // Input Riwayat Servis
-        Route::get('/input_servis', [InputPemeliharaanController::class, 'index_servis'])
+        Route::get('/input-servis', [InputPemeliharaanController::class, 'index_servis'])
             ->name('input_servis.index');
-        Route::post('/input_servis/servis', [RiwayatServisController::class, 'store'])
+        Route::post('/input-servis/servis', [RiwayatServisController::class, 'store'])
             ->name('input_servis.store');
 
         // Kendaraan
@@ -287,24 +291,24 @@ Route::middleware(['auth', 'role:Administrator'])->group(function () {
             ->name('kendaraan.destroy');
 
         // Riwayat Pengajuan Pemeliharaan
-        Route::get('/riwayat_admin', [PengajuanPemeliharaanController::class, 'riwayat_admin'])
+        Route::get('/riwayat-admin', [PengajuanPemeliharaanController::class, 'riwayat_admin'])
             ->name('riwayat_admin');
-        Route::delete('/riwayat_admin/{id}', [PengajuanPemeliharaanController::class, 'destroy'])
+        Route::delete('/riwayat-admin/{id}', [PengajuanPemeliharaanController::class, 'destroy'])
             ->name('riwayat_admin.destroy');
         Route::post('/{id}/approve', [PengajuanPemeliharaanController::class, 'approve'])
             ->name('approve');
         Route::post('/{id}/reject', [PengajuanPemeliharaanController::class, 'reject'])
             ->name('reject');
-        Route::get('/riwayat_admin/{id}', [PengajuanPemeliharaanController::class, 'show_admin'])
+        Route::get('/riwayat-admin/{id}', [PengajuanPemeliharaanController::class, 'show_admin'])
             ->whereNumber('id')
             ->name('show_admin');
 
         // Riwayat Pajak
-        Route::get('/riwayat_pajak', [RiwayatPajakController::class, 'index'])
+        Route::get('/riwayat-pajak', [RiwayatPajakController::class, 'index'])
             ->name('riwayat_pajak.index');
-        Route::put('/riwayat_pajak/{id}', [RiwayatPajakController::class, 'update'])
+        Route::put('/riwayat-pajak/{id}', [RiwayatPajakController::class, 'update'])
             ->name('riwayat_pajak.update');
-        Route::delete('/riwayat_pajak/{id}', [RiwayatPajakController::class, 'destroy'])
+        Route::delete('/riwayat-pajak/{id}', [RiwayatPajakController::class, 'destroy'])
             ->name('riwayat_pajak.destroy');
     });
 });
@@ -322,9 +326,9 @@ Route::middleware(['auth', 'role:Staff'])->group(function () {
         ->name('pengajuan.index');
     Route::post('/pengajuan', [PengajuanController::class, 'store'])
         ->name('pengajuan.store');
-    Route::get('/pengajuan/riwayat_user', [PengajuanController::class, 'riwayat_user'])
+    Route::get('/pengajuan/riwayat-user', [PengajuanController::class, 'riwayat_user'])
         ->name('pengajuan.riwayat_user');
-    Route::get('/pengajuan/riwayat_user/{id}', [PengajuanController::class, 'show_user'])
+    Route::get('/pengajuan/riwayat-user/{id}', [PengajuanController::class, 'show_user'])
         ->whereNumber('id')
         ->name('pengajuan.show_user');
     Route::delete('/pengajuan/{id}/cancel', [PengajuanController::class, 'cancel'])
@@ -337,9 +341,9 @@ Route::middleware(['auth', 'role:Staff'])->group(function () {
         ->name('pengajuan-bmn.index');
     Route::post('/pengajuan-bmn', [PengajuanBMNController::class, 'store'])
         ->name('pengajuan-bmn.store');
-    Route::get('/pengajuan-bmn/riwayat_user', [PengajuanBMNController::class, 'riwayat_user'])
+    Route::get('/pengajuan-bmn/riwayat-user', [PengajuanBMNController::class, 'riwayat_user'])
         ->name('pengajuan-bmn.riwayat_user');
-    Route::get('/pengajuan-bmn/riwayat_user/{id}', [PengajuanBMNController::class, 'show_user'])
+    Route::get('/pengajuan-bmn/riwayat-user/{id}', [PengajuanBMNController::class, 'show_user'])
         ->whereNumber('id')
         ->name('pengajuan-bmn.show_user');
     Route::delete('/pengajuan/{id}/cancel', [PengajuanBMNController::class, 'cancel'])
@@ -368,9 +372,9 @@ Route::middleware(['auth', 'role:Staff'])->group(function () {
 
     Route::prefix('pemeliharaan')->name('pemeliharaan.')->group(function () {
         // Riwayat Pengajuan Pemeliharaan
-        Route::get('/riwayat_user', [PengajuanPemeliharaanController::class, 'riwayat_user'])
+        Route::get('/riwayat-user', [PengajuanPemeliharaanController::class, 'riwayat_user'])
             ->name('riwayat_user');
-        Route::get('/riwayat_user/{id}', [PengajuanPemeliharaanController::class, 'show_user'])
+        Route::get('/riwayat-user/{id}', [PengajuanPemeliharaanController::class, 'show_user'])
             ->whereNumber('id')
             ->name('show_user');
         Route::delete('/{id}/cancel', [PengajuanPemeliharaanController::class, 'cancel'])
