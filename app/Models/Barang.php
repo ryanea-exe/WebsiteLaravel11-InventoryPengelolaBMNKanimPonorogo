@@ -26,7 +26,7 @@ class Barang extends Model
 
     public function barangMasuk()
     {
-        return $this->hasMany(BarangMasuk::class, 'barang_id');
+        return $this->hasMany(BarangMasukDetail::class, 'barang_id');
     }
 
     public function transaksi()
