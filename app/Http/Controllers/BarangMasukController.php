@@ -194,27 +194,40 @@ class BarangMasukController extends Controller
         DB::beginTransaction();
 
         try {
-            $barangMasuk = BarangMasuk::with('barang')->findOrFail($id);
+            $barangMasuk = BarangMasuk::with('details.barang')->findOrFail($id);
 
-            if ($barangMasuk->barang) {
+            // kembalikan stok
+            foreach ($barangMasuk->details as $detail) {
+                $barang = Barang::lockForUpdate()->find($detail->barang_id);
+
                 // cek agar stok tidak minus
-                if ($barangMasuk->barang->jumlah < $barangMasuk->jumlah) {
+                if ($barang->jumlah < $detail->jumlah) {
+                    DB::rollBack();
+
                     return redirect()->back()
                         ->with('error', 'Stok barang tidak mencukupi untuk menghapus data ini');
                 }
 
-                $barangMasuk->barang->decrement('jumlah', $barangMasuk->jumlah);
+                // kurangi stok
+                $barang->decrement('jumlah', $detail->jumlah);
             }
 
+            // hapus detail dulu
+            $barangMasuk->details()->delete();
+
+            // hapus header
             $barangMasuk->delete();
 
             DB::commit();
 
-            return redirect()->back()->with('success', 'Data barang masuk berhasil dihapus');
+            return redirect()->back()
+                ->with('success', 'Data barang masuk berhasil dihapus');
 
         } catch (\Throwable $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', 'Gagal menghapus data barang masuk');
+
+            return redirect()->back()
+                ->with('error', 'Gagal menghapus data barang masuk: ' . $e->getMessage());
         }
     }
 }
