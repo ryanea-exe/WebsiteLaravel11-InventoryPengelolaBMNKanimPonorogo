@@ -124,11 +124,11 @@
                         <input type="text" name="seksi_singkat" class="w-full px-3 py-1.5 border rounded-lg" placeholder="Masukkan singkatan seksi" required>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Kepala Seksi <span class="text-red-500">*</span></label>
-                        <input type="text" name="nama_kepala" class="w-full px-3 py-1.5 border rounded-lg" placeholder="Masukkan nama kepala seksi" required>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Kepala Seksi</label>
+                        <input type="text" name="nama_kepala" class="w-full px-3 py-1.5 border rounded-lg" placeholder="Masukkan nama kepala seksi">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">NIP Kepala Seksi </label>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">NIP Kepala Seksi</label>
                         <input type="text" name="nip_kepala" class="w-full px-3 py-1.5 border rounded-lg" placeholder="Masukkan NIP kepala seksi">
                     </div>
                 </div>
@@ -170,24 +170,20 @@
             <div class="px-6 py-4 overflow-y-auto flex-1">
                 <div class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Seksi</label>
-                        <input type="text" name="seksi" id="edit_seksi"
-                            class="w-full px-3 py-1.5 border rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Nama Seksi <span class="text-red-500">*</span></label>
+                        <input type="text" name="seksi" id="edit_seksi" required class="w-full px-3 py-1.5 border rounded-lg">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Singkatan Seksi</label>
-                        <input type="text" name="seksi_singkat" id="edit_seksi_singkat"
-                            class="w-full px-3 py-1.5 border rounded-lg">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Singkatan Seksi <span class="text-red-500">*</span></label>
+                        <input type="text" name="seksi_singkat" id="edit_seksi_singkat" required class="w-full px-3 py-1.5 border rounded-lg">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">Nama Kepala</label>
-                        <input type="text" name="nama_kepala" id="edit_nama_kepala"
-                            class="w-full px-3 py-1.5 border rounded-lg">
+                        <input type="text" name="nama_kepala" id="edit_nama_kepala" class="w-full px-3 py-1.5 border rounded-lg">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-gray-700 mb-1">NIP Kepala</label>
-                        <input type="text" name="nip_kepala" id="edit_nip_kepala"
-                            class="w-full px-3 py-1.5 border rounded-lg">
+                        <input type="text" name="nip_kepala" id="edit_nip_kepala" class="w-full px-3 py-1.5 border rounded-lg">
                     </div>
                 </div>
             </div>
